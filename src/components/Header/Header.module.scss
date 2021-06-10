@@ -1,0 +1,20 @@
+.header {
+  height: 60px;
+  background: #000;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: #F1F5F9 1px solid;
+  padding: 0 20px;
+  
+  .header_Search {
+    margin-right: 1em;
+  };
+  
+  .header_Search a, 
+  .header_SearchHistory a{
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+
+}

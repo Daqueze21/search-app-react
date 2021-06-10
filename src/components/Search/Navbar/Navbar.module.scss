@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 250px;
+  background: #2f353d;
+
+  .item {
+    padding: 0px 10%;
+    margin: 10px 0;
+  }
+
+  .item a {
+    color: #FFF;
+    font-weight: 600;
+    font-size: 17px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .item a:hover {
+    transition: 0.3s;
+    color: #4572ED;
+  }
+
+  .item .active {
+    color: #F3BA00;
+  }
+}
+
+
+
