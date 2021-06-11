@@ -7,9 +7,9 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.header_Search}>
         <NavLink
-          to="/search"
+          to="/Search"
           activeStyle={{
-            color: 'yellow',
+            color: '#F3BA00',
           }}
         >
           Search
@@ -17,9 +17,9 @@ const Header = () => {
       </div>
       <div className={styles.header_SearchHistory}>
         <NavLink
-          to="/history"
+          to="/History"
           activeStyle={{
-            color: 'yellow',
+            color: '#F3BA00',
           }}
         >
           Search History

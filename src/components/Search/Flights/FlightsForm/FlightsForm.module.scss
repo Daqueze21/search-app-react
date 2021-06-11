@@ -1,0 +1,122 @@
+$inputs-color:#d6d6d6;
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  margin: 10px 0;
+  border: 2px solid #2f353d;
+  border-radius: 5px;
+
+  .dates{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+
+    &From, &To {
+      width: 45%;
+
+      input{
+        margin: 5px 0;
+        width: 95%;
+        height: 30px;
+        border:none;
+        border-radius: 5px;
+        background:$inputs-color;
+        color: black;
+      };
+      
+      input:active {
+        border: blue;
+      };
+      
+      p{
+        margin: 0;
+        padding: 0;
+      };
+    };
+  };
+  //dates-end
+  .FlightsSelectorsWrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    height: 100px;
+
+    h4{
+      margin: 5px;
+    };
+
+    .FlightsSelectors{
+      display: flex;
+      justify-content: space-between;
+
+      .FlightsSelectorWrapper{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+
+        p{
+          margin: 0;
+          padding: 0;
+        };
+
+        .FlightsSelector{
+          display: flex;
+          justify-content: space-around;
+          height: 30px;
+          width: 100%;
+          
+          select{
+            border:none;
+            border-radius: 5px;
+            background:$inputs-color;
+            width: 70%;
+            cursor: pointer;
+          };
+          
+          label{
+            margin: 5px;
+          };
+        };
+      };
+    };
+  };
+  //FlightsSelectorsWrapper-end
+
+  .controlBtns{
+    display: flex;
+    justify-content: flex-end;
+    height: 50px;
+    padding: 5px;
+      
+    .clearBtn, .searchBtn {
+      width: 100px; 
+      height: 30px;
+      border: 0;
+      border-radius: 5px;
+      margin: 5px;
+    };
+
+    .clearBtn{
+      background:$inputs-color;
+      cursor: pointer;
+    };
+
+    .clearBtn:hover {
+      background:#c7c7c7;
+    };
+
+    .searchBtn{
+      background:#2f353d;
+      color:#fff;
+      cursor: pointer;
+    };
+
+    .searchBtn:hover {
+      background:#2c3239;
+    };
+  };
+  // controlBtns-end
+};

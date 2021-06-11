@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import styles from './Flights.module.scss';
+import FlightsForm from './FlightsForm/FlightsForm';
 
 export default function Flights() {
   return (
     <div className={styles.Flights}>
-      Flights
-      <input id="date" type="date" min="2020-01-01" max="2020-12-31" />
-      <input id="date" type="date" min="2020-02-01" max="2020-12-31" />
+      <h2>Flights</h2>
+      <FlightsForm />
+      <div className={styles.FlightsList}>Flights list</div>
     </div>
   );
 }

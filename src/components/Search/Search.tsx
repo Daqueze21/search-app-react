@@ -12,13 +12,13 @@ const Search = () => {
     <div className={styles.SearchWrapper}>
       <Navbar />
       <Switch>
-        <Route path="/search/flights">
+        <Route path="/Search/Flights">
           <Flights />
         </Route>
-        <Route path="/search/hotels">
+        <Route path="/Search/Hotels">
           <Hotels />
         </Route>
-        <Route path="/search/cars">
+        <Route path="/Search/Cars">
           <Cars />
         </Route>
       </Switch>

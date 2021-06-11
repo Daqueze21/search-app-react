@@ -6,17 +6,17 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={`${styles.item}`}>
-        <NavLink to="/search/flights" activeClassName={styles.active}>
+        <NavLink to="/Search/Flights" activeClassName={styles.active}>
           Flights
         </NavLink>
       </div>
       <div className={styles.item}>
-        <NavLink to="/search/hotels" activeClassName={styles.active}>
+        <NavLink to="/Search/Hotels" activeClassName={styles.active}>
           Hotels
         </NavLink>
       </div>
       <div className={styles.item}>
-        <NavLink to="/search/cars" activeClassName={styles.active}>
+        <NavLink to="/Search/Cars" activeClassName={styles.active}>
           Cars
         </NavLink>
       </div>
