@@ -5,29 +5,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'uuid-random';
 
 import {
-  TFlightsFormData,
+  THotelsFormData,
   localStorageUpdateHistory,
   dateNow,
   dateNowPlusYear,
 } from '../../../utils';
-import {
-  getCountriesList,
-  getCitiesFromList,
-  getCitiesToList,
-} from '../../../../store/reducers/Search_Slice';
+import { getCountriesList, getCitiesFromList } from '../../../../store/reducers/Search_Slice';
 import { RootState } from '../../../../store/reducers/store';
-import styles from './FlightsForm.module.scss';
+import styles from './HotelsForm.module.scss';
 
-export default function FlightsForm() {
+export default function HotelsForm() {
   // local form data
-  // const [countryFrom, setCountryFrom] = useState<string>('');
-  // const [countryTo, setCountryTo] = useState<string>('');
+  const [amenities, setAmenities] = useState<string>('');
+  const [hotelCity, setHotelCity] = useState<string>('');
   const [dateFrom, setDateFrom] = useState<string>('');
   // data from store
   const dispatch = useDispatch();
   const { countriesList } = useSelector((state: RootState) => state.Search);
   const { citiesFromList } = useSelector((state: RootState) => state.Search);
-  const { citiesToList } = useSelector((state: RootState) => state.Search);
+  // const { citiesToList } = useSelector((state: RootState) => state.Search);
   const getCountries = useCallback(() => dispatch(getCountriesList()), [dispatch]);
   useEffect(() => {
     getCountries();
@@ -41,8 +37,8 @@ export default function FlightsForm() {
     reset,
   } = useForm();
   // form handler
-  const onSubmitFormHandler = (data: TFlightsFormData) => {
-    const updateData = { ...data, type: 'Flights', id: uuid() };
+  const onSubmitFormHandler = (data: THotelsFormData) => {
+    const updateData = { ...data, type: 'Hotels', id: uuid() };
     localStorageUpdateHistory(updateData);
   };
 
@@ -51,12 +47,14 @@ export default function FlightsForm() {
     // setCountryFrom(e.target.value);
     dispatch(getCitiesFromList(e.target.value));
   };
-  const setCountryToHandler = (e: any) => {
-    // setCountryTo(e.target.value);
-    dispatch(getCitiesToList(e.target.value));
-  };
   const setDateHandler = (e: any) => {
     setDateFrom(e.target.value);
+  };
+  const setAmenitiesHandler = (e: any) => {
+    setAmenities(e.target.value);
+  };
+  const setHotelCityHandler = (e: any) => {
+    setHotelCity(e.target.value);
   };
 
   const countriesOptions: JSX.Element[] = countriesList.map((country) => (
@@ -64,12 +62,8 @@ export default function FlightsForm() {
       {country}
     </option>
   ));
+
   const citiesFromOptions: JSX.Element[] = citiesFromList.map((city) => (
-    <option key={uuid()} value={city}>
-      {city}
-    </option>
-  ));
-  const citiesToOptions: JSX.Element[] = citiesToList.map((city) => (
     <option key={uuid()} value={city}>
       {city}
     </option>
@@ -103,53 +97,56 @@ export default function FlightsForm() {
         </div>
       </div>
       {/* dates-end */}
-      <div className={styles.FlightsSelectorsWrapper}>
-        <h4>From</h4>
-        <div className={styles.FlightsSelectors}>
-          <div className={styles.FlightsSelectorWrapper}>
-            <div className={styles.FlightsSelector}>
-              <label>Country:</label>
+      <div className={styles.HotelsSelectorsWrapper}>
+        <h4>Amenities</h4>
+        <div className={styles.HotelsSelectors}>
+          <div className={styles.HotelsSelectorWrapper}>
+            <div className={styles.HotelsSelector}>
               <select
-                {...register('countryFrom', { required: true })}
-                onChange={setCountryFromHandler}
+                {...register('amenities', { required: true })}
+                value={amenities}
+                onChange={setAmenitiesHandler}
               >
-                {countriesOptions}
+                <option value="1">1 star </option>
+                <option value="2">2 star </option>
+                <option value="3">3 star </option>
+                <option value="4">4 star </option>
+                <option value="5">5 star </option>
               </select>
             </div>
-            {errors.countryFrom?.type === 'required' && <p>field is required</p>}
-          </div>
-          <div className={styles.FlightsSelectorWrapper}>
-            <div className={styles.FlightsSelector}>
-              <label>City:</label>
-              <select {...register('cityFrom', { required: true })}>{citiesFromOptions}</select>
-            </div>
-            {errors.cityFrom?.type === 'required' && <p>field is required</p>}
+            {errors.amenities?.type === 'required' && <p>field is required</p>}
           </div>
         </div>
       </div>
       {/* FlightsSelectorsWrapper-end */}
-      <div className={styles.FlightsSelectorsWrapper}>
+      <div className={styles.HotelsSelectorsWrapper}>
         <h4>To</h4>
-        <div className={styles.FlightsSelectors}>
-          <div className={styles.FlightsSelectorWrapper}>
-            <div className={styles.FlightsSelector}>
+        <div className={styles.HotelsSelectors}>
+          <div className={styles.HotelsSelectorWrapper}>
+            <div className={styles.HotelsSelector}>
               <label>Country:</label>
-              <select {...register('countryTo', { required: true })} onChange={setCountryToHandler}>
+              <select {...register('country', { required: true })} onChange={setCountryFromHandler}>
                 {countriesOptions}
               </select>
             </div>
-            {errors.countryTo?.type === 'required' && <p>field is required</p>}
+            {errors.country?.type === 'required' && <p>field is required</p>}
           </div>
-          <div className={styles.FlightsSelectorWrapper}>
-            <div className={styles.FlightsSelector}>
+          <div className={styles.HotelsSelectorWrapper}>
+            <div className={styles.HotelsSelector}>
               <label>City:</label>
-              <select {...register('cityTo', { required: true })}>{citiesToOptions}</select>
+              <select
+                {...register('city', { required: true })}
+                value={hotelCity}
+                onChange={setHotelCityHandler}
+              >
+                {citiesFromOptions}
+              </select>
             </div>
-            {errors.cityTo?.type === 'required' && <p>field is required</p>}
+            {errors.city?.type === 'required' && <p>field is required</p>}
           </div>
         </div>
       </div>
-      {/* FlightsSelectorsWrapper-end */}
+      {/* HotelsSelectorsWrapper-end */}
       <div className={styles.controlBtns}>
         <input
           className={styles.clearBtn}
@@ -161,8 +158,7 @@ export default function FlightsForm() {
               dateTo: '',
               countryFrom: '',
               cityFrom: '',
-              cityTo: '',
-              countryTo: '',
+              Amenities: '',
             })
           }
         />

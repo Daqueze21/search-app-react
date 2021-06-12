@@ -11,17 +11,17 @@ export type TFlightsFormData = {
 };
 
 export type THotelsFormData = {
-  cityFrom: string;
+  city: string;
   amenities: string;
-  countryFrom: string;
+  country: string;
   dateFrom: string;
   dateTo: string;
 };
 
 export type TCarsFormData = {
   carsType: string;
-  cityFrom: string;
-  countryFrom: string;
+  city: string;
+  country: string;
   dateFrom: string;
   dateTo: string;
 };
@@ -42,11 +42,14 @@ export interface ICarsHistoryData extends TCarsFormData {
 export const dateNow = moment().format('YYYY-MM-DD');
 export const dateNowPlusYear = moment().add(1, 'year').format('YYYY-MM-DD');
 
-export const localStorageUpdateHistory = (data: IFlightsHistoryData[]) => {
-  localStorage.setItem('searchHistory', JSON.stringify(data));
+export const localStorageUpdateHistory = (data: IFlightsHistoryData | IHotelsHistoryData) => {
+  const historyDataFromStorage = getHistoryData();
+  historyDataFromStorage === null
+    ? localStorage.setItem('searchHistory', JSON.stringify([data]))
+    : localStorage.setItem('searchHistory', JSON.stringify([...historyDataFromStorage, data]));
 };
 
-export const getHistoryData = (): IFlightsHistoryData[] | null => {
+export const getHistoryData = (): IFlightsHistoryData[] | IHotelsHistoryData[] | null => {
   const data: any = localStorage.getItem('searchHistory');
   try {
     return JSON.parse(data);

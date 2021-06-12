@@ -10,7 +10,7 @@ export default function History() {
   const [historyList, setHistoryList] = useState<IFlightsHistoryData[]>([]);
   useEffect(() => {
     const getData: any = getHistoryData();
-    if (getData == null) setHistoryList(getData);
+    if (getData === null) return;
     setHistoryList(getData);
   }, []);
 
@@ -24,14 +24,16 @@ export default function History() {
     if (historyItem.type === 'Cars') {
       return <CarsCard key={historyItem.id} data={historyItem} />;
     }
-    return <div key={99}>History</div>;
+    return <div key={99}>History is empty</div>;
   });
 
   return (
     <div className={styles.HistoryWrapper}>
       <h3>Search History</h3>
       <div className={styles.History}>
-        <div className={styles.HistoryList}>{historyListRender}</div>
+        <div className={styles.HistoryList}>
+          {historyList.length ? historyListRender : <div key={99}>History is empty</div>}
+        </div>
       </div>
     </div>
   );

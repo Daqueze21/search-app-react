@@ -17,16 +17,16 @@ interface HotelCardFormProps {
   data: IHotelsHistoryData;
 }
 const FlightsCard: React.FC<HotelCardFormProps> = ({ data }) => {
-  const { dateFrom, dateTo, cityFrom, amenities = '5' } = data;
+  const { dateFrom, dateTo, city, amenities = '5' } = data;
 
   return (
     <div className={styles.HistoryCard}>
       <div className={styles.CardIcon}>
         <img className={styles.Icon} src={HotelsImg} alt="Hotel" />
       </div>
-      <NavLink to="/Search/Hotel">
+      <NavLink to="/Search/Hotels">
         {moment(dateFrom, 'YYYY-MM-DD').format('MMM Do YYYY')}-
-        {moment(dateTo, 'YYYY-MM-DD').format('MMM Do YYYY')}, {cityFrom}, {stars[amenities]}
+        {moment(dateTo, 'YYYY-MM-DD').format('MMM Do YYYY')}, {city}, {stars[amenities]}
       </NavLink>
       <div className={styles.DeleteBtn}>
         <button type="button">X</button>

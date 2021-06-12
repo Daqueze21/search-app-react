@@ -9,7 +9,7 @@ interface CarsCardFormProps {
   data: ICarsHistoryData;
 }
 const FlightsCard: React.FC<CarsCardFormProps> = ({ data }) => {
-  const { dateFrom, dateTo, cityFrom, carsType } = data;
+  const { dateFrom, dateTo, city, carsType } = data;
   return (
     <div className={styles.HistoryCard}>
       <div className={styles.CardIcon}>
@@ -17,7 +17,7 @@ const FlightsCard: React.FC<CarsCardFormProps> = ({ data }) => {
       </div>
       <NavLink to="/Search/Cars">
         {moment(dateFrom, 'YYYY-MM-DD').format('MMM Do YYYY')}-
-        {moment(dateTo, 'YYYY-MM-DD').format('MMM Do YYYY')}, {cityFrom}, {carsType}
+        {moment(dateTo, 'YYYY-MM-DD').format('MMM Do YYYY')}, {city}, {carsType}
       </NavLink>
       <div className={styles.DeleteBtn}>
         <button type="button">X</button>
