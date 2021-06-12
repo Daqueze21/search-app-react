@@ -12,18 +12,17 @@ import {
 } from '../../../utils';
 import { getCountriesList, getCitiesFromList } from '../../../../store/reducers/Search_Slice';
 import { RootState } from '../../../../store/reducers/store';
-import styles from './HotelsForm.module.scss';
+import styles from '../../SearchForm.module.scss';
 
 export default function HotelsForm() {
   // local form data
   const [amenities, setAmenities] = useState<string>('');
-  const [hotelCity, setHotelCity] = useState<string>('');
+  const [hotelsCity, setHotelsCity] = useState<string>('');
   const [dateFrom, setDateFrom] = useState<string>('');
   // data from store
   const dispatch = useDispatch();
   const { countriesList } = useSelector((state: RootState) => state.Search);
   const { citiesFromList } = useSelector((state: RootState) => state.Search);
-  // const { citiesToList } = useSelector((state: RootState) => state.Search);
   const getCountries = useCallback(() => dispatch(getCountriesList()), [dispatch]);
   useEffect(() => {
     getCountries();
@@ -53,8 +52,8 @@ export default function HotelsForm() {
   const setAmenitiesHandler = (e: any) => {
     setAmenities(e.target.value);
   };
-  const setHotelCityHandler = (e: any) => {
-    setHotelCity(e.target.value);
+  const setHotelsCityHandler = (e: any) => {
+    setHotelsCity(e.target.value);
   };
 
   const countriesOptions: JSX.Element[] = countriesList.map((country) => (
@@ -70,9 +69,9 @@ export default function HotelsForm() {
   ));
 
   return (
-    <form onSubmit={handleSubmit(onSubmitFormHandler)}>
+    <form onSubmit={handleSubmit(onSubmitFormHandler)} className={styles.SearchForm}>
       <div className={styles.dates}>
-        <div className={styles.datesFrom}>
+        <div className={styles.date}>
           <label>Start Date</label>
           <input
             {...register('dateFrom', { required: true, min: dateNow })}
@@ -84,7 +83,7 @@ export default function HotelsForm() {
           {errors.dateFrom?.type === 'required' && <p>date is required</p>}
           {errors.dateFrom?.type === 'min' && <p>cant be less than the current date</p>}
         </div>
-        <div className={styles.datesTo}>
+        <div className={styles.date}>
           <label>End Date</label>
           <input
             {...register('dateTo', { required: true, min: dateFrom })}
@@ -97,11 +96,11 @@ export default function HotelsForm() {
         </div>
       </div>
       {/* dates-end */}
-      <div className={styles.HotelsSelectorsWrapper}>
+      <div className={styles.SearchFormSelectorsWrapper}>
         <h4>Amenities</h4>
-        <div className={styles.HotelsSelectors}>
-          <div className={styles.HotelsSelectorWrapper}>
-            <div className={styles.HotelsSelector}>
+        <div className={styles.SearchFormSelectors}>
+          <div className={styles.SearchFormSelectorWrapper}>
+            <div className={styles.SearchFormSelector}>
               <select
                 {...register('amenities', { required: true })}
                 value={amenities}
@@ -118,35 +117,35 @@ export default function HotelsForm() {
           </div>
         </div>
       </div>
-      {/* FlightsSelectorsWrapper-end */}
-      <div className={styles.HotelsSelectorsWrapper}>
-        <h4>To</h4>
-        <div className={styles.HotelsSelectors}>
-          <div className={styles.HotelsSelectorWrapper}>
-            <div className={styles.HotelsSelector}>
+      {/* SearchFormSelectorsWrapper-end */}
+      <div className={styles.SearchFormSelectorsWrapper}>
+        <h4>Location</h4>
+        <div className={styles.SearchFormSelectors}>
+          <div className={styles.SearchFormSelectorWrapper}>
+            <div className={styles.SearchFormSelector}>
               <label>Country:</label>
               <select {...register('country', { required: true })} onChange={setCountryFromHandler}>
                 {countriesOptions}
               </select>
+              {errors.country?.type === 'required' && <p>field is required</p>}
             </div>
-            {errors.country?.type === 'required' && <p>field is required</p>}
           </div>
-          <div className={styles.HotelsSelectorWrapper}>
-            <div className={styles.HotelsSelector}>
+          <div className={styles.SearchFormSelectorWrapper}>
+            <div className={styles.SearchFormSelector}>
               <label>City:</label>
               <select
                 {...register('city', { required: true })}
-                value={hotelCity}
-                onChange={setHotelCityHandler}
+                value={hotelsCity}
+                onChange={setHotelsCityHandler}
               >
                 {citiesFromOptions}
               </select>
+              {errors.city?.type === 'required' && <p>field is required</p>}
             </div>
-            {errors.city?.type === 'required' && <p>field is required</p>}
           </div>
         </div>
       </div>
-      {/* HotelsSelectorsWrapper-end */}
+      {/* SearchFormSelectorsWrapper-end */}
       <div className={styles.controlBtns}>
         <input
           className={styles.clearBtn}
@@ -156,9 +155,9 @@ export default function HotelsForm() {
             reset({
               dateFrom: '',
               dateTo: '',
-              countryFrom: '',
-              cityFrom: '',
-              Amenities: '',
+              country: '',
+              city: '',
+              amenities: '',
             })
           }
         />

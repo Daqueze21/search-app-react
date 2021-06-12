@@ -7,7 +7,7 @@ export default function Hotels() {
     <div className={styles.Hotels}>
       <h2>Hotels</h2>
       <HotelsForm />
-      <div className={styles.HotelsList}>Flights list</div>
+      <div className={styles.HotelsList}>Hotels list</div>
     </div>
   );
 }

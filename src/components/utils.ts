@@ -42,14 +42,20 @@ export interface ICarsHistoryData extends TCarsFormData {
 export const dateNow = moment().format('YYYY-MM-DD');
 export const dateNowPlusYear = moment().add(1, 'year').format('YYYY-MM-DD');
 
-export const localStorageUpdateHistory = (data: IFlightsHistoryData | IHotelsHistoryData) => {
+export const localStorageUpdateHistory = (
+  data: IFlightsHistoryData | IHotelsHistoryData | ICarsHistoryData
+) => {
   const historyDataFromStorage = getHistoryData();
   historyDataFromStorage === null
     ? localStorage.setItem('searchHistory', JSON.stringify([data]))
     : localStorage.setItem('searchHistory', JSON.stringify([...historyDataFromStorage, data]));
 };
 
-export const getHistoryData = (): IFlightsHistoryData[] | IHotelsHistoryData[] | null => {
+export const getHistoryData = ():
+  | IFlightsHistoryData[]
+  | IHotelsHistoryData[]
+  | ICarsHistoryData[]
+  | null => {
   const data: any = localStorage.getItem('searchHistory');
   try {
     return JSON.parse(data);

@@ -17,6 +17,11 @@ function App() {
           <Route path="/History">
             <History />
           </Route>
+          <Route path="/">
+            <div>
+              <h1>Search App</h1>
+            </div>
+          </Route>
         </Switch>
       </Router>
     </div>

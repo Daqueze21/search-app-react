@@ -4,30 +4,20 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'uuid-random';
 
-import {
-  TFlightsFormData,
-  localStorageUpdateHistory,
-  dateNow,
-  dateNowPlusYear,
-} from '../../../utils';
-import {
-  getCountriesList,
-  getCitiesFromList,
-  getCitiesToList,
-} from '../../../../store/reducers/Search_Slice';
+import { TCarsFormData, localStorageUpdateHistory, dateNow, dateNowPlusYear } from '../../../utils';
+import { getCountriesList, getCitiesFromList } from '../../../../store/reducers/Search_Slice';
 import { RootState } from '../../../../store/reducers/store';
 import styles from '../../SearchForm.module.scss';
 
-export default function FlightsForm() {
+export default function CarsForm() {
   // local form data
-  // const [countryFrom, setCountryFrom] = useState<string>('');
-  // const [countryTo, setCountryTo] = useState<string>('');
+  const [carsType, setCarsType] = useState<string>('');
+  const [carsCity, setCarsCity] = useState<string>('');
   const [dateFrom, setDateFrom] = useState<string>('');
   // data from store
   const dispatch = useDispatch();
   const { countriesList } = useSelector((state: RootState) => state.Search);
   const { citiesFromList } = useSelector((state: RootState) => state.Search);
-  const { citiesToList } = useSelector((state: RootState) => state.Search);
   const getCountries = useCallback(() => dispatch(getCountriesList()), [dispatch]);
   useEffect(() => {
     getCountries();
@@ -41,8 +31,8 @@ export default function FlightsForm() {
     reset,
   } = useForm();
   // form handler
-  const onSubmitFormHandler = (data: TFlightsFormData) => {
-    const updateData = { ...data, type: 'Flights', id: uuid() };
+  const onSubmitFormHandler = (data: TCarsFormData) => {
+    const updateData = { ...data, type: 'Cars', id: uuid() };
     localStorageUpdateHistory(updateData);
   };
 
@@ -51,12 +41,14 @@ export default function FlightsForm() {
     // setCountryFrom(e.target.value);
     dispatch(getCitiesFromList(e.target.value));
   };
-  const setCountryToHandler = (e: any) => {
-    // setCountryTo(e.target.value);
-    dispatch(getCitiesToList(e.target.value));
-  };
   const setDateHandler = (e: any) => {
     setDateFrom(e.target.value);
+  };
+  const setCarsTypeHandler = (e: any) => {
+    setCarsType(e.target.value);
+  };
+  const setCarsCityHandler = (e: any) => {
+    setCarsCity(e.target.value);
   };
 
   const countriesOptions: JSX.Element[] = countriesList.map((country) => (
@@ -64,12 +56,8 @@ export default function FlightsForm() {
       {country}
     </option>
   ));
+
   const citiesFromOptions: JSX.Element[] = citiesFromList.map((city) => (
-    <option key={uuid()} value={city}>
-      {city}
-    </option>
-  ));
-  const citiesToOptions: JSX.Element[] = citiesToList.map((city) => (
     <option key={uuid()} value={city}>
       {city}
     </option>
@@ -104,48 +92,48 @@ export default function FlightsForm() {
       </div>
       {/* dates-end */}
       <div className={styles.SearchFormSelectorsWrapper}>
-        <h4>From</h4>
+        <h4>Type</h4>
         <div className={styles.SearchFormSelectors}>
           <div className={styles.SearchFormSelectorWrapper}>
             <div className={styles.SearchFormSelector}>
-              <label>Country:</label>
               <select
-                {...register('countryFrom', { required: true })}
-                onChange={setCountryFromHandler}
+                {...register('carsType', { required: true })}
+                value={carsType}
+                onChange={setCarsTypeHandler}
               >
-                {countriesOptions}
+                <option value="economy">economy</option>
+                <option value="business">business</option>
               </select>
             </div>
-            {errors.countryFrom?.type === 'required' && <p>field is required</p>}
-          </div>
-          <div className={styles.SearchFormSelectorWrapper}>
-            <div className={styles.SearchFormSelector}>
-              <label>City:</label>
-              <select {...register('cityFrom', { required: true })}>{citiesFromOptions}</select>
-            </div>
-            {errors.cityFrom?.type === 'required' && <p>field is required</p>}
+            {errors.carsType?.type === 'required' && <p>field is required</p>}
           </div>
         </div>
       </div>
       {/* SearchFormSelectorsWrapper-end */}
       <div className={styles.SearchFormSelectorsWrapper}>
-        <h4>To</h4>
+        <h4>Location</h4>
         <div className={styles.SearchFormSelectors}>
           <div className={styles.SearchFormSelectorWrapper}>
             <div className={styles.SearchFormSelector}>
               <label>Country:</label>
-              <select {...register('countryTo', { required: true })} onChange={setCountryToHandler}>
+              <select {...register('country', { required: true })} onChange={setCountryFromHandler}>
                 {countriesOptions}
               </select>
             </div>
-            {errors.countryTo?.type === 'required' && <p>field is required</p>}
+            {errors.country?.type === 'required' && <p>field is required</p>}
           </div>
           <div className={styles.SearchFormSelectorWrapper}>
             <div className={styles.SearchFormSelector}>
               <label>City:</label>
-              <select {...register('cityTo', { required: true })}>{citiesToOptions}</select>
+              <select
+                {...register('city', { required: true })}
+                value={carsCity}
+                onChange={setCarsCityHandler}
+              >
+                {citiesFromOptions}
+              </select>
             </div>
-            {errors.cityTo?.type === 'required' && <p>field is required</p>}
+            {errors.city?.type === 'required' && <p>field is required</p>}
           </div>
         </div>
       </div>
@@ -159,10 +147,9 @@ export default function FlightsForm() {
             reset({
               dateFrom: '',
               dateTo: '',
-              countryFrom: '',
-              cityFrom: '',
-              cityTo: '',
-              countryTo: '',
+              country: '',
+              city: '',
+              carsType: '',
             })
           }
         />
