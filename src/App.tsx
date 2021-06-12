@@ -3,6 +3,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Search from './components/Search/Search';
+import History from './components/History/History';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
             <Search />
           </Route>
           <Route path="/History">
-            <div>History</div>
+            <History />
           </Route>
         </Switch>
       </Router>

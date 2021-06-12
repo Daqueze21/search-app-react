@@ -20,8 +20,8 @@ import styles from './FlightsForm.module.scss';
 
 export default function FlightsForm() {
   // local form data
-  const [countryFrom, setCountryFrom] = useState<string>('');
-  const [countryTo, setCountryTo] = useState<string>('');
+  // const [countryFrom, setCountryFrom] = useState<string>('');
+  // const [countryTo, setCountryTo] = useState<string>('');
   const [dateFrom, setDateFrom] = useState<string>('');
   // data from store
   const dispatch = useDispatch();
@@ -48,11 +48,11 @@ export default function FlightsForm() {
 
   // handlers
   const setCountryFromHandler = (e: any) => {
-    setCountryFrom(e.target.value);
+    // setCountryFrom(e.target.value);
     dispatch(getCitiesFromList(e.target.value));
   };
   const setCountryToHandler = (e: any) => {
-    setCountryTo(e.target.value);
+    // setCountryTo(e.target.value);
     dispatch(getCitiesToList(e.target.value));
   };
   const setDateHandler = (e: any) => {
