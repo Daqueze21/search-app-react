@@ -38,18 +38,17 @@ export interface ICarsHistoryData extends TCarsFormData {
   type: string;
   id: string;
 }
-// type Nullable<T> = IFlightsHistoryData | null;
+// export interface Icombined extends IFlightsHistoryData, ICarsHistoryData, IHotelsHistoryData {}
+
 export const dateNow = moment().format('YYYY-MM-DD');
 export const dateNowPlusYear = moment().add(1, 'year').format('YYYY-MM-DD');
 
-export const localStorageUpdateHistory = (
-  data: IFlightsHistoryData | IHotelsHistoryData | ICarsHistoryData
-) => {
+export function localStorageUpdateHistory<T>(data: T): void {
   const historyDataFromStorage = getHistoryData();
   historyDataFromStorage === null
     ? localStorage.setItem('searchHistory', JSON.stringify([data]))
     : localStorage.setItem('searchHistory', JSON.stringify([...historyDataFromStorage, data]));
-};
+}
 
 export const getHistoryData = ():
   | IFlightsHistoryData[]

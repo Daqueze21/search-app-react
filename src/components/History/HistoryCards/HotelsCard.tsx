@@ -15,8 +15,10 @@ const stars: any = {
 
 interface HotelCardFormProps {
   data: IHotelsHistoryData;
+  removeHistoryItem: (id: string) => void;
+  id: string;
 }
-const FlightsCard: React.FC<HotelCardFormProps> = ({ data }) => {
+const FlightsCard: React.FC<HotelCardFormProps> = ({ data, removeHistoryItem, id }) => {
   const { dateFrom, dateTo, city, amenities = '5' } = data;
 
   return (
@@ -29,7 +31,9 @@ const FlightsCard: React.FC<HotelCardFormProps> = ({ data }) => {
         {moment(dateTo, 'YYYY-MM-DD').format('MMM Do YYYY')}, {city}, {stars[amenities]}
       </NavLink>
       <div className={styles.DeleteBtn}>
-        <button type="button">X</button>
+        <button type="button" onClick={() => removeHistoryItem(id)}>
+          X
+        </button>
       </div>
     </div>
   );

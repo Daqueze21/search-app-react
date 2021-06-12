@@ -7,8 +7,10 @@ import { IFlightsHistoryData } from '../../utils';
 
 interface FlightsCardFormProps {
   data: IFlightsHistoryData;
+  removeHistoryItem: (id: string) => void;
+  id: string;
 }
-const FlightsCard: React.FC<FlightsCardFormProps> = ({ data }) => {
+const FlightsCard: React.FC<FlightsCardFormProps> = ({ data, removeHistoryItem, id }) => {
   const { dateFrom, dateTo, cityFrom, cityTo } = data;
   return (
     <div className={styles.HistoryCard}>
@@ -21,7 +23,9 @@ const FlightsCard: React.FC<FlightsCardFormProps> = ({ data }) => {
         {cityTo}
       </NavLink>
       <div className={styles.DeleteBtn}>
-        <button type="button">X</button>
+        <button type="button" onClick={() => removeHistoryItem(id)}>
+          X
+        </button>
       </div>
     </div>
   );

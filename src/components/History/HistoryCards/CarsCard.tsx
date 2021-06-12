@@ -7,8 +7,10 @@ import { ICarsHistoryData } from '../../utils';
 
 interface CarsCardFormProps {
   data: ICarsHistoryData;
+  removeHistoryItem: (id: string) => void;
+  id: string;
 }
-const FlightsCard: React.FC<CarsCardFormProps> = ({ data }) => {
+const FlightsCard: React.FC<CarsCardFormProps> = ({ data, removeHistoryItem, id }) => {
   const { dateFrom, dateTo, city, carsType } = data;
   return (
     <div className={styles.HistoryCard}>
@@ -20,7 +22,9 @@ const FlightsCard: React.FC<CarsCardFormProps> = ({ data }) => {
         {moment(dateTo, 'YYYY-MM-DD').format('MMM Do YYYY')}, {city}, {carsType}
       </NavLink>
       <div className={styles.DeleteBtn}>
-        <button type="button">X</button>
+        <button type="button" onClick={() => removeHistoryItem(id)}>
+          X
+        </button>
       </div>
     </div>
   );
