@@ -10,7 +10,7 @@ import {
   dateNow,
   dateNowPlusYear,
 } from '../../../utils';
-import { getCountriesList, getCitiesFromList } from '../../../../store/reducers/Search_Slice';
+import { getCountriesList, getCitiesToList } from '../../../../store/reducers/Search_Slice';
 import { RootState } from '../../../../store/reducers/store';
 import styles from '../../SearchForm.module.scss';
 
@@ -22,7 +22,8 @@ export default function HotelsForm() {
   // data from store
   const dispatch = useDispatch();
   const { countriesList } = useSelector((state: RootState) => state.Search);
-  const { citiesFromList } = useSelector((state: RootState) => state.Search);
+  const { citiesToList } = useSelector((state: RootState) => state.Search);
+  const { countryTo } = useSelector((state: RootState) => state.Search);
   const getCountries = useCallback(() => dispatch(getCountriesList()), [dispatch]);
   useEffect(() => {
     getCountries();
@@ -42,9 +43,8 @@ export default function HotelsForm() {
   };
 
   // handlers
-  const setCountryFromHandler = (e: any) => {
-    // setCountryFrom(e.target.value);
-    dispatch(getCitiesFromList(e.target.value));
+  const setCountryToHandler = (e: any) => {
+    dispatch(getCitiesToList(e.target.value));
   };
   const setDateHandler = (e: any) => {
     setDateFrom(e.target.value);
@@ -62,7 +62,7 @@ export default function HotelsForm() {
     </option>
   ));
 
-  const citiesFromOptions: JSX.Element[] = citiesFromList.map((city) => (
+  const citiesToOptions: JSX.Element[] = citiesToList.map((city) => (
     <option key={uuid()} value={city}>
       {city}
     </option>
@@ -124,7 +124,11 @@ export default function HotelsForm() {
           <div className={styles.SearchFormSelectorWrapper}>
             <div className={styles.SearchFormSelector}>
               <label>Country:</label>
-              <select {...register('country', { required: true })} onChange={setCountryFromHandler}>
+              <select
+                {...register('country', { required: true })}
+                value={countryTo}
+                onChange={setCountryToHandler}
+              >
                 {countriesOptions}
               </select>
               {errors.country?.type === 'required' && <p>field is required</p>}
@@ -138,7 +142,7 @@ export default function HotelsForm() {
                 value={hotelsCity}
                 onChange={setHotelsCityHandler}
               >
-                {citiesFromOptions}
+                {citiesToOptions}
               </select>
               {errors.city?.type === 'required' && <p>field is required</p>}
             </div>

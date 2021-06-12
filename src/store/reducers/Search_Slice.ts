@@ -7,6 +7,8 @@ export type TSearchState = {
   countriesList: string[];
   citiesFromList: string[];
   citiesToList: string[];
+  countryFrom: string;
+  countryTo: string;
 };
 
 const initialState: TSearchState = {
@@ -14,6 +16,8 @@ const initialState: TSearchState = {
   countriesList: [],
   citiesFromList: [],
   citiesToList: [],
+  countryFrom: '',
+  countryTo: '',
 };
 // reducer
 const searchSlice = createSlice({
@@ -31,6 +35,12 @@ const searchSlice = createSlice({
     },
     setCitiesToList(state, action: PayloadAction<string[]>) {
       state.citiesToList = action.payload;
+    },
+    setCountryFrom(state, action: PayloadAction<string>) {
+      state.countryFrom = action.payload;
+    },
+    setCountryTo(state, action: PayloadAction<string>) {
+      state.countryTo = action.payload;
     },
   },
 });
@@ -53,6 +63,7 @@ export const getCitiesFromList =
   (country: string): AppThunk =>
   async (dispatch: any) => {
     await dispatch(setStatus('Loading...'));
+    dispatch(setCountryFrom(country));
 
     axios
       .get(`/api/mock-data/countries.min.json`)
@@ -72,7 +83,7 @@ export const getCitiesToList =
   (country: string): AppThunk =>
   async (dispatch: any) => {
     await dispatch(setStatus('Loading...'));
-
+    dispatch(setCountryTo(country));
     axios
       .get(`/api/mock-data/countries.min.json`)
       .then((answer) => {
@@ -92,5 +103,7 @@ export const { setStatus } = searchSlice.actions;
 export const { setCountriesList } = searchSlice.actions;
 export const { setCitiesFromList } = searchSlice.actions;
 export const { setCitiesToList } = searchSlice.actions;
+export const { setCountryFrom } = searchSlice.actions;
+export const { setCountryTo } = searchSlice.actions;
 
 export default searchSlice.reducer;

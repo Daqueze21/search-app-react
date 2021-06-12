@@ -20,14 +20,16 @@ import styles from '../../SearchForm.module.scss';
 
 export default function FlightsForm() {
   // local form data
-  // const [countryFrom, setCountryFrom] = useState<string>('');
-  // const [countryTo, setCountryTo] = useState<string>('');
   const [dateFrom, setDateFrom] = useState<string>('');
+  const [cityFrom, setCityFrom] = useState<string>('');
+  const [cityTo, setCityTo] = useState<string>('');
   // data from store
   const dispatch = useDispatch();
   const { countriesList } = useSelector((state: RootState) => state.Search);
   const { citiesFromList } = useSelector((state: RootState) => state.Search);
   const { citiesToList } = useSelector((state: RootState) => state.Search);
+  const { countryFrom } = useSelector((state: RootState) => state.Search);
+  const { countryTo } = useSelector((state: RootState) => state.Search);
   const getCountries = useCallback(() => dispatch(getCountriesList()), [dispatch]);
   useEffect(() => {
     getCountries();
@@ -47,16 +49,22 @@ export default function FlightsForm() {
   };
 
   // handlers
+  const setDateHandler = (e: any) => {
+    setDateFrom(e.target.value);
+  };
   const setCountryFromHandler = (e: any) => {
-    // setCountryFrom(e.target.value);
+    setCityFrom('');
     dispatch(getCitiesFromList(e.target.value));
   };
   const setCountryToHandler = (e: any) => {
-    // setCountryTo(e.target.value);
+    setCityTo('');
     dispatch(getCitiesToList(e.target.value));
   };
-  const setDateHandler = (e: any) => {
-    setDateFrom(e.target.value);
+  const setCityFromHandler = (e: any) => {
+    setCityFrom(e.target.value);
+  };
+  const setCityToHandler = (e: any) => {
+    setCityTo(e.target.value);
   };
 
   const countriesOptions: JSX.Element[] = countriesList.map((country) => (
@@ -111,6 +119,7 @@ export default function FlightsForm() {
               <label>Country:</label>
               <select
                 {...register('countryFrom', { required: true })}
+                value={countryFrom}
                 onChange={setCountryFromHandler}
               >
                 {countriesOptions}
@@ -121,7 +130,13 @@ export default function FlightsForm() {
           <div className={styles.SearchFormSelectorWrapper}>
             <div className={styles.SearchFormSelector}>
               <label>City:</label>
-              <select {...register('cityFrom', { required: true })}>{citiesFromOptions}</select>
+              <select
+                {...register('cityFrom', { required: true })}
+                onChange={setCityFromHandler}
+                value={cityFrom}
+              >
+                {citiesFromOptions}
+              </select>
             </div>
             {errors.cityFrom?.type === 'required' && <p>field is required</p>}
           </div>
@@ -134,7 +149,11 @@ export default function FlightsForm() {
           <div className={styles.SearchFormSelectorWrapper}>
             <div className={styles.SearchFormSelector}>
               <label>Country:</label>
-              <select {...register('countryTo', { required: true })} onChange={setCountryToHandler}>
+              <select
+                {...register('countryTo', { required: true })}
+                value={countryTo}
+                onChange={setCountryToHandler}
+              >
                 {countriesOptions}
               </select>
             </div>
@@ -143,7 +162,13 @@ export default function FlightsForm() {
           <div className={styles.SearchFormSelectorWrapper}>
             <div className={styles.SearchFormSelector}>
               <label>City:</label>
-              <select {...register('cityTo', { required: true })}>{citiesToOptions}</select>
+              <select
+                {...register('cityTo', { required: true })}
+                onChange={setCityToHandler}
+                value={cityTo}
+              >
+                {citiesToOptions}
+              </select>
             </div>
             {errors.cityTo?.type === 'required' && <p>field is required</p>}
           </div>
