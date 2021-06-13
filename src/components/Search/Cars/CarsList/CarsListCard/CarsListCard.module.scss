@@ -1,0 +1,121 @@
+.CarsListCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 27%;
+  height: 175px;
+  padding: 12px;
+  background: #ebebeb;
+  border-bottom: 3px solid #2C3239;
+  border-radius: 15px 0px 15px 0px;
+  margin: 15px;
+  cursor: pointer;
+  overflow: hidden;
+    
+  .CardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 20px;
+
+    .CarName{
+      width: 60%;
+      margin-right: 5px;
+
+      h4 {
+        font-size: 20px;
+        margin: 0;
+        margin-bottom: 5px;
+        padding: 0;
+        white-space: nowrap;
+        overflow:hidden;
+        text-overflow: ellipsis;
+      };
+        
+      h5 {
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        overflow:hidden;
+        text-overflow: ellipsis;
+      };
+    };
+
+    .CardImg{
+      display: flex;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+      width: 12%;
+
+      .CarIcon{
+        width: 80px;
+      };
+    };
+  };
+  //CardHeader-end
+
+  .CarMain{
+    display: flex;
+    
+    .CarFeatures{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 62%;
+          
+      .CarFeature{
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+
+        .CarFeatureImg{
+          width: 20px;
+          margin-right: 7px;
+        }
+        span {
+          font-size: 14px;
+        };
+      }
+    };
+
+    .CarPricing{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      width: 35%;
+
+      .CarPrice{
+        font-size: 24px;
+        margin-bottom: 10px;
+      };
+
+      .DealBtn{
+        justify-self: space-between;
+        width: 80px; 
+        height: 30px;
+        border: 0;
+        border-radius: 5px;
+        margin: 0;
+        background:#2f353d;
+        font-size: 14px;
+        color:#fff;
+        cursor: pointer;
+      };
+
+      .DealBtn:hover {
+        background:#2c3239;
+      };
+    };
+  };
+  //CardMain-end
+};
+
+.CarsListCard:hover {
+  border-bottom: 5px solid #2C3239;
+  background: #d6d6d6;
+  transition: .3s ease;
+};

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import styles from '../History.module.scss';
-import FlightsImg from '../../../assets/images/Cars.svg';
+import carIcon from '../../../assets/images/Cars2.svg';
 import { ICarsHistoryData } from '../../utils';
 
 interface CarsCardFormProps {
@@ -15,7 +15,7 @@ const FlightsCard: React.FC<CarsCardFormProps> = ({ data, removeHistoryItem, id 
   return (
     <div className={styles.HistoryCard}>
       <div className={styles.CardIcon}>
-        <img className={styles.Icon} src={FlightsImg} alt="Car" />
+        <img className={styles.Icon} src={carIcon} alt="Car" />
       </div>
       <NavLink to="/Search/Cars">
         {moment(dateFrom, 'YYYY-MM-DD').format('MMM Do YYYY')}-

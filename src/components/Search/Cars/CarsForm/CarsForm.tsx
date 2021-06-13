@@ -5,7 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'uuid-random';
 
 import { TCarsFormData, localStorageUpdateHistory, dateNow, dateNowPlusYear } from '../../../utils';
-import { getCountriesList, getCitiesToList } from '../../../../store/reducers/Search_Slice';
+import {
+  getCountriesList,
+  getCitiesToList,
+  getCarsList,
+  getCarsFormData,
+} from '../../../../store/reducers/Search_Slice';
 import { RootState } from '../../../../store/reducers/store';
 import styles from '../../SearchForm.module.scss';
 
@@ -33,6 +38,8 @@ export default function CarsForm() {
   } = useForm();
   // form handler
   const onSubmitToHandler = (data: TCarsFormData) => {
+    dispatch(getCarsFormData(JSON.stringify(data)));
+    dispatch(getCarsList(data.carsType));
     const updateData = { ...data, type: 'Cars', id: uuid() };
     localStorageUpdateHistory(updateData);
   };

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { AppThunk } from '../index';
+import { TCar } from '../../components/utils';
 
 export type TSearchState = {
   status: string;
@@ -9,6 +10,8 @@ export type TSearchState = {
   citiesToList: string[];
   countryFrom: string;
   countryTo: string;
+  carsList: TCar[];
+  carsFormData: string;
 };
 
 const initialState: TSearchState = {
@@ -18,6 +21,8 @@ const initialState: TSearchState = {
   citiesToList: [],
   countryFrom: '',
   countryTo: '',
+  carsList: [],
+  carsFormData: '',
 };
 // reducer
 const searchSlice = createSlice({
@@ -41,6 +46,12 @@ const searchSlice = createSlice({
     },
     setCountryTo(state, action: PayloadAction<string>) {
       state.countryTo = action.payload;
+    },
+    setCarsList(state, action: PayloadAction<TCar[]>) {
+      state.carsList = action.payload;
+    },
+    setCarsFormData(state, action: PayloadAction<string>) {
+      state.carsFormData = action.payload;
     },
   },
 });
@@ -98,6 +109,29 @@ export const getCitiesToList =
       });
   };
 
+export const getCarsList =
+  (carsType: string): AppThunk =>
+  async (dispatch: any) => {
+    await dispatch(setStatus('Loading...'));
+    axios
+      .get(`/api/mock-data/cars.json`)
+      .then((answer) => {
+        const filteredCarsList = answer.data.filter((car: TCar) => car.Type === carsType);
+        // console.log(carsType, result);
+        dispatch(setCarsList(filteredCarsList));
+      })
+      .catch((error: AxiosError) => {
+        dispatch(setStatus(`Error: ${error.response}`));
+      });
+  };
+
+export const getCarsFormData =
+  (CarsFormData: string): AppThunk =>
+  async (dispatch: any) => {
+    await dispatch(setStatus('Loading...'));
+    dispatch(setCarsFormData(CarsFormData));
+  };
+
 // actions
 export const { setStatus } = searchSlice.actions;
 export const { setCountriesList } = searchSlice.actions;
@@ -105,5 +139,7 @@ export const { setCitiesFromList } = searchSlice.actions;
 export const { setCitiesToList } = searchSlice.actions;
 export const { setCountryFrom } = searchSlice.actions;
 export const { setCountryTo } = searchSlice.actions;
+export const { setCarsList } = searchSlice.actions;
+export const { setCarsFormData } = searchSlice.actions;
 
 export default searchSlice.reducer;

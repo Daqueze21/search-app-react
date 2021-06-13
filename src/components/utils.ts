@@ -38,8 +38,17 @@ export interface ICarsHistoryData extends TCarsFormData {
   type: string;
   id: string;
 }
-// export interface Icombined extends IFlightsHistoryData, ICarsHistoryData, IHotelsHistoryData {}
+export type TCar = {
+  id: string;
+  Model: string;
+  Manufacturer: string;
+  Year: string;
+  Type: string;
+  Price: string;
+  Seats: number;
+};
 
+// functions
 export const dateNow = moment().format('YYYY-MM-DD');
 export const dateNowPlusYear = moment().add(1, 'year').format('YYYY-MM-DD');
 

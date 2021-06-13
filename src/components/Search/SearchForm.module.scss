@@ -5,7 +5,8 @@ $inputs-color:#d6d6d6;
   flex-direction: column;
   justify-content: center;
   width: 600px;
-  margin: 10px 0;
+  margin-top: 10px;
+  margin-bottom: 25px;
   border: 2px solid #2f353d;
   border-radius: 5px;
 
@@ -99,6 +100,7 @@ $inputs-color:#d6d6d6;
       border: 0;
       border-radius: 5px;
       margin: 5px;
+      font-size: 14px;
     };
 
     .clearBtn{
