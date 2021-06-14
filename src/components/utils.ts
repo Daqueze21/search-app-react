@@ -42,15 +42,6 @@ export type TFlight = {
   depart: TDepart;
   return: TReturn;
 };
-export type TCar = {
-  id: string;
-  Model: string;
-  Manufacturer: string;
-  Year: string;
-  Type: string;
-  Price: string;
-  Seats: number;
-};
 
 type TDepart = {
   id: string;
@@ -67,6 +58,25 @@ type TReturn = {
   Price: string;
   DepartureTime: string;
   ArrivalTime: string;
+};
+
+export type TCar = {
+  id: string;
+  Model: string;
+  Manufacturer: string;
+  Year: string;
+  Type: string;
+  Price: string;
+  Seats: number;
+};
+
+export type THotel = {
+  id: string;
+  Hotel: string;
+  Street: string;
+  Guests: string;
+  Price: string;
+  Amenities: number;
 };
 
 // functions

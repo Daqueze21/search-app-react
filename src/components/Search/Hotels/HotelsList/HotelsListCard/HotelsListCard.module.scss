@@ -1,0 +1,110 @@
+.HotelsListCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+  height: 240px;
+  padding: 10px 15px 10px 20px;
+  background: #ebebeb;
+  border-bottom: 3px solid #2C3239;
+  border-radius: 15px 0px 15px 0px;
+  margin: 15px;
+  cursor: pointer;
+  overflow: hidden;
+
+  .HotelHeader {
+    display: flex;
+    align-items: center;
+    height: 20%;
+    margin: 0 10px;
+    
+    .HotelIcon{
+      width: 25px;
+      margin-right: 25px;
+    };
+
+    .HotelName {
+      font-size: 20px;
+      margin: 0 10px;
+      padding: 0;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    };
+  };
+
+  .HotelSubstring{
+    display: flex;
+    align-items: center;
+    height: 15%;
+    margin: 0 10px;
+    font-size: 15px;
+  };
+    
+  .HotelInfoWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80%;
+
+    .HotelInfo{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 3px;
+      height: 95%;
+      width: 65%;
+      margin-right: 5px;
+
+      .HotelService {
+        display: flex;
+        align-items: flex-start;
+        margin: 5px 0;
+
+        .HotelServiceImg{
+          width: 20px;
+          margin-right: 7px;
+        };
+
+        span {
+          font-size: 14px;
+        };
+      };
+    };
+
+    .HotelPricing{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 25%;
+
+      .HotelPrice{
+        font-size: 24px;
+        margin-bottom: 30px;
+      };
+
+      .DealBtn{
+        width: 100px; 
+        height: 40px;
+        border: 0;
+        border-radius: 5px;
+        margin: 0;
+        background:#2f353d;
+        font-size: 14px;
+        color:#fff;
+        cursor: pointer;
+      };
+
+      .DealBtn:hover {
+        background:#2c3239;
+      };
+    };
+  };
+};
+
+.HotelsListCard:hover {
+  border-bottom: 5px solid #2C3239;
+  background: #d6d6d6;
+  transition: .3s ease;
+};

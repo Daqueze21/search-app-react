@@ -10,7 +10,12 @@ import {
   dateNow,
   dateNowPlusYear,
 } from '../../../utils';
-import { getCountriesList, getCitiesToList } from '../../../../store/reducers/Search_Slice';
+import {
+  getCountriesList,
+  getCitiesToList,
+  getHotelsFormData,
+  getHotelsList,
+} from '../../../../store/reducers/Search_Slice';
 import { RootState } from '../../../../store/reducers/store';
 import styles from '../../SearchForm.module.scss';
 
@@ -38,6 +43,8 @@ export default function HotelsForm() {
   } = useForm();
   // form handler
   const onSubmitFormHandler = (data: THotelsFormData) => {
+    dispatch(getHotelsFormData(JSON.stringify(data)));
+    dispatch(getHotelsList(data.amenities));
     const updateData = { ...data, type: 'Hotels', id: uuid() };
     localStorageUpdateHistory(updateData);
   };
