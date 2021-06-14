@@ -38,6 +38,10 @@ export interface ICarsHistoryData extends TCarsFormData {
   type: string;
   id: string;
 }
+export type TFlight = {
+  depart: TDepart;
+  return: TReturn;
+};
 export type TCar = {
   id: string;
   Model: string;
@@ -46,6 +50,23 @@ export type TCar = {
   Type: string;
   Price: string;
   Seats: number;
+};
+
+type TDepart = {
+  id: string;
+  Airline: string;
+  FlightNumber: string;
+  Price: string;
+  DepartureTime: string;
+  ArrivalTime: string;
+};
+type TReturn = {
+  id: string;
+  Airline: string;
+  FlightNumber: string;
+  Price: string;
+  DepartureTime: string;
+  ArrivalTime: string;
 };
 
 // functions

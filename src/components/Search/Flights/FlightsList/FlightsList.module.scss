@@ -1,0 +1,34 @@
+.FlightsListWrapper {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: flex-start;
+
+  .FlightsSearchInfo{
+    width: 95%;
+    height: 35px;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    align-items: center;
+    background: #ebebeb;
+    border: 2px solid #c1c1c1;
+    border-radius: 4px;
+
+    .SearchInfo{
+      font-size: 1em;
+      font-weight: bold;
+    };
+  };
+
+  // .FlightsList{
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   list-style: none;
+  //   width: 95%;
+  //   min-height: 400px;
+  //   margin: 15px auto;
+  //   padding: 5px 0;
+  // };
+};

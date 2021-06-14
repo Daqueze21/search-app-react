@@ -14,6 +14,8 @@ import {
   getCountriesList,
   getCitiesFromList,
   getCitiesToList,
+  getFlightsList,
+  getFlightsFormData,
 } from '../../../../store/reducers/Search_Slice';
 import { RootState } from '../../../../store/reducers/store';
 import styles from '../../SearchForm.module.scss';
@@ -44,6 +46,8 @@ export default function FlightsForm() {
   } = useForm();
   // form handler
   const onSubmitFormHandler = (data: TFlightsFormData) => {
+    dispatch(getFlightsFormData(JSON.stringify(data)));
+    dispatch(getFlightsList());
     const updateData = { ...data, type: 'Flights', id: uuid() };
     localStorageUpdateHistory(updateData);
   };

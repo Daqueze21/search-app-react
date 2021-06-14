@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { AppThunk } from '../index';
-import { TCar } from '../../components/utils';
+import { TCar, TFlight } from '../../components/utils';
 
 export type TSearchState = {
   status: string;
@@ -12,6 +12,9 @@ export type TSearchState = {
   countryTo: string;
   carsList: TCar[];
   carsFormData: string;
+  // FlightsForm
+  flightsList: TFlight[];
+  flightsFormData: string;
 };
 
 const initialState: TSearchState = {
@@ -23,6 +26,9 @@ const initialState: TSearchState = {
   countryTo: '',
   carsList: [],
   carsFormData: '',
+  // FlightsForm
+  flightsList: [],
+  flightsFormData: '',
 };
 // reducer
 const searchSlice = createSlice({
@@ -47,11 +53,19 @@ const searchSlice = createSlice({
     setCountryTo(state, action: PayloadAction<string>) {
       state.countryTo = action.payload;
     },
+    // carsForm
     setCarsList(state, action: PayloadAction<TCar[]>) {
       state.carsList = action.payload;
     },
     setCarsFormData(state, action: PayloadAction<string>) {
       state.carsFormData = action.payload;
+    },
+    // FlightsForm
+    setFlightsList(state, action: PayloadAction<TFlight[]>) {
+      state.flightsList = action.payload;
+    },
+    setFlightsFormData(state, action: PayloadAction<string>) {
+      state.flightsFormData = action.payload;
     },
   },
 });
@@ -109,6 +123,7 @@ export const getCitiesToList =
       });
   };
 
+// carsForm
 export const getCarsList =
   (carsType: string): AppThunk =>
   async (dispatch: any) => {
@@ -117,7 +132,6 @@ export const getCarsList =
       .get(`/api/mock-data/cars.json`)
       .then((answer) => {
         const filteredCarsList = answer.data.filter((car: TCar) => car.Type === carsType);
-        // console.log(carsType, result);
         dispatch(setCarsList(filteredCarsList));
       })
       .catch((error: AxiosError) => {
@@ -132,6 +146,26 @@ export const getCarsFormData =
     dispatch(setCarsFormData(CarsFormData));
   };
 
+// FlightsForm
+export const getFlightsList = (): AppThunk => async (dispatch: any) => {
+  await dispatch(setStatus('Loading...'));
+  axios
+    .get(`/api/mock-data/flights.json`)
+    .then((answer) => {
+      dispatch(setFlightsList(answer.data));
+    })
+    .catch((error: AxiosError) => {
+      dispatch(setStatus(`Error: ${error.response}`));
+    });
+};
+
+export const getFlightsFormData =
+  (FlightsFormData: string): AppThunk =>
+  async (dispatch: any) => {
+    await dispatch(setStatus('Loading...'));
+    dispatch(setFlightsFormData(FlightsFormData));
+  };
+
 // actions
 export const { setStatus } = searchSlice.actions;
 export const { setCountriesList } = searchSlice.actions;
@@ -139,7 +173,11 @@ export const { setCitiesFromList } = searchSlice.actions;
 export const { setCitiesToList } = searchSlice.actions;
 export const { setCountryFrom } = searchSlice.actions;
 export const { setCountryTo } = searchSlice.actions;
+// carsForm
 export const { setCarsList } = searchSlice.actions;
 export const { setCarsFormData } = searchSlice.actions;
+// FlightsForm
+export const { setFlightsList } = searchSlice.actions;
+export const { setFlightsFormData } = searchSlice.actions;
 
 export default searchSlice.reducer;

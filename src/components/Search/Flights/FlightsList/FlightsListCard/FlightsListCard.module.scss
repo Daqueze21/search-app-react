@@ -1,0 +1,96 @@
+.FlightsListCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+  height: 240px;
+  padding: 0 15px 20px;
+  background: #ebebeb;
+  border-bottom: 3px solid #2C3239;
+  border-radius: 15px 0px 15px 0px;
+  margin: 15px;
+  cursor: pointer;
+  overflow: hidden;
+
+  .FlightHeader {
+    display: flex;
+    align-items: center;
+    height: 20%;
+    margin: 0 10px;
+    
+    .CarIcon{
+      width: 25px;
+      margin-right: 25px;
+    };
+
+    .FlightAirline {
+      font-size: 20px;
+      margin: 0;
+      margin-bottom: 5px;
+      padding: 0;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    };
+  }
+    
+  .FlightInfoWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 45%;
+    
+
+    .FlightInfo{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3px;
+      height: 95%;
+      width: 30%;
+      margin-right: 5px;      
+
+      .FlightInfoTime {
+        font-weight: bold;
+        margin: 0;
+        margin-top: 8px;
+        padding: 0;
+        font-size: 28px;
+        white-space: nowrap;
+        overflow:hidden;
+        text-overflow: ellipsis;
+      };
+
+      .FlightInfoCity {
+        font-size: 18px;
+        margin: 5px 0;
+        padding: 0;
+        white-space: nowrap;
+        overflow:hidden;
+        text-overflow: ellipsis;
+      };
+      .FlightDate{
+        margin-bottom: 5px;
+      };
+    };
+    .FlightPrice{
+      font-size: 25px;
+      font-weight: bold;
+    };
+  };
+  
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #2C3239;
+    margin: 0;
+    padding: 0;
+  };
+};
+
+.FlightsListCard:hover {
+  border-bottom: 5px solid #2C3239;
+  background: #d6d6d6;
+  transition: .3s ease;
+};
